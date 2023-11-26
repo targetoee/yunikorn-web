@@ -34,6 +34,7 @@ import {NOT_AVAILABLE} from '@app/utils/constants';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {EnvconfigService} from '../envconfig/envconfig.service';
+import {uncompress} from 'snappyjs';
 
 @Injectable({
   providedIn: 'root',
@@ -81,10 +82,13 @@ export class SchedulerService {
   }
 
   fetchAppList(partitionName: string, queueName: string): Observable<AppInfo[]> {
-    const appsUrl = `${this.envConfig.getSchedulerWebAddress()}/ws/v1/partition/${partitionName}/queue/${queueName}/applications`;
+    const appsUrl = `${this.envConfig.getSchedulerWebAddress()}/ws/v1/partition/${partitionName}/queue/${queueName}/applications/compress`;
 
-    return this.httpClient.get(appsUrl).pipe(
-      map((data: any) => {
+    return this.httpClient.get(appsUrl, {responseType: 'arraybuffer'}).pipe(
+      map((originData: any) => {
+        const decodeArrayBuffer = uncompress(originData);
+        const decodeData = new TextDecoder('utf-8').decode(decodeArrayBuffer)
+        const data = JSON.parse(decodeData)
         const result: AppInfo[] = [];
 
         if (data && data.length > 0) {
