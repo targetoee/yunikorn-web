@@ -34,7 +34,6 @@ import {NOT_AVAILABLE} from '@app/utils/constants';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {EnvconfigService} from '../envconfig/envconfig.service';
-import {uncompress} from 'snappyjs';
 
 @Injectable({
   providedIn: 'root',
