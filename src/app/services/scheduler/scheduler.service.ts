@@ -195,11 +195,14 @@ export class SchedulerService {
 
         if (data && data.length > 0) {
           data.forEach((node: any) => {
+            let hostname = node['hostname'] == undefined ? node['hostname'] : node['si.io/hostname'];
+            let rackname = node['rackname'] == undefined ? node['rackname'] : node['si.io/rackname'];
+            let partition = node['partition'] == undefined ? node['partition'] : node['si.io/node-partition'];
             const nodeInfo = new NodeInfo(
               node['nodeID'],
-              node['hostName'],
-              node['rackName'],
-              node['partition'] || NOT_AVAILABLE,
+              hostname,
+              rackname,
+              partition || NOT_AVAILABLE,
               this.formatResource(node['capacity'] as SchedulerResourceInfo),
               this.formatResource(node['allocated'] as SchedulerResourceInfo),
               this.formatResource(node['occupied'] as SchedulerResourceInfo),

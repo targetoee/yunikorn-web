@@ -591,6 +591,21 @@
       "nodeID": "lima-rancher-desktop",
       "hostName": "",
       "rackName": "",
+      "attributes": {
+        "beta.kubernetes.io/arch": "amd64",
+        "beta.kubernetes.io/os": "linux",
+        "kubernetes.io/arch": "amd64",
+        "kubernetes.io/hostname": "node-0001",
+        "kubernetes.io/os": "linux",
+        "node-role.kubernetes.io/control-plane": "",
+        "node-role.kubernetes.io/master": "",
+        "node.kubernetes.io/exclude-from-external-load-balancers": "",
+        "ready": "true",
+        "si.io/hostname": "node-0001",
+        "si.io/rackname": "/rack-default",
+        "si/instance-type": "",
+        "si/node-partition": "[mycluster]default"
+      },
       "capacity": {
         "ephemeral-storage": 99833802265,
         "hugepages-1Gi": 0,
